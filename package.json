@@ -4,8 +4,8 @@
   "description": "A Phonebook application with a React frontend and an Express.js backend. It allows users to view, add, and delete contacts. The backend serves a REST API, and minor frontend adjustments were made to align with the new API endpoints. ",
   "main": "index.js",
   "scripts": {
-    "build:ui": "rm -rf Backend/dist && cd Frontend && npm run build && cp -r dist ../Backend rm -rf ./dist",
-    "deploy:full":"git config --global core.autocrlf input"
+    "build:ui": "rm -rf Backend/dist && cd Frontend && npm run build && cp -r dist ../Backend && rm -rf ./dist",
+    "deploy:full":"npm run build:ui && git config --global core.autocrlf input && git add . && git commit -m \"Full Deployment\" && git push"
   },
   "repository": {
     "type": "git",
