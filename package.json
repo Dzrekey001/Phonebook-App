@@ -1,0 +1,23 @@
+{
+  "name": "phonebook-app",
+  "version": "1.0.0",
+  "description": "A Phonebook application with a React frontend and an Express.js backend. It allows users to view, add, and delete contacts. The backend serves a REST API, and minor frontend adjustments were made to align with the new API endpoints. ",
+  "main": "index.js",
+  "scripts": {
+    "build:ui": "rm -rf Backend/dist && cd Frontend && npm run build && cp -r dist ../Backend rm -rf ./dist",
+    "deploy:full":"git config --global core.autocrlf input"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dzrekey001/Phonebook-App.git"
+  },
+  "author": "Dzrekey001",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dzrekey001/Phonebook-App/issues"
+  },
+  "homepage": "https://github.com/Dzrekey001/Phonebook-App#readme",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}

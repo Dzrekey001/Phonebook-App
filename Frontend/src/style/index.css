@@ -1,0 +1,19 @@
+li {
+    list-style: none;
+    padding: 5px;
+    font-size: 16px;
+    display: inline;
+}
+
+.message {
+    font-size: 20px; 
+    padding: 10px;
+    border-style: solid;
+}
+.form-input {
+    padding: 5px;
+}
+
+h2 {
+    color: green;
+}
