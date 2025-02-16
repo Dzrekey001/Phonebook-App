@@ -61,9 +61,14 @@ const App = () => {
       if (window.confirm(`"${newPerson.name}" exist. Do you want to replace contact?`)) {
         ContactService.updateContact(persons.find((p) => p.name === newPerson.name).id, {number: newPerson.number})
         .then((data)=> {
-          setPersons(data)
+          setPersons(persons.map((p)=> p.id === data.id? data: p))
           setColor("green")
           setMessage(`"${newPerson.name}" contact updated!`)
+          setTimeout(()=> setMessage(null),2000)
+        }).catch((err)=>{
+          setColor("red")
+          setMessage(`User does exits!`)
+          setPersons((prev)=> prev.filter((p)=> newPerson.name !== p.name))
           setTimeout(()=> setMessage(null),2000)
         })
       }
@@ -80,6 +85,7 @@ const App = () => {
       setNewName('')
       setNumber('')
   }}
+
 
   return (
     <div>

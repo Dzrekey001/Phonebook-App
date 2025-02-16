@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/Dzrekey001/Phonebook-App#readme",
   "dependencies": {
-    "cors": "^2.8.5"
+
   }
 }

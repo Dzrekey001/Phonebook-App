@@ -19,27 +19,34 @@ app.use(morgan(':method :url HTTP :http-version  :res[content-length] - :respons
 
 
 app.get('/api/persons', (req, res)=> {
-    res.status(200).json(ContactService.getPersons())
+    const persons = ContactService.getPersons().then((data)=>{
+        res.json(data)
+    });
 })
 
 app.get('/api/person/:id', (req, res) => {
-    const ID = req.params.id
-    const person = ContactService.getPerson(ID);
-    if (person) {
-        res.status(200).json(person)
-    } else {
-        res.status(404).json({error: "Not Found"})
-    }
+    const id = req.params.id
+    ContactService.getPerson(id)
+    .then((person)=>{
+        if (person) {
+            res.status(200).json(person)
+        } else {
+            res.status(404).json({error: "Not Found"})
+        }
+    })
 })
 
 app.delete('/api/person/:id', (req, res) => {
     const id = req.params.id;
-    const del = ContactService.deletePerson(id)
-    if (del) {
-        res.status(200).json(del);  
-    } else {
-        res.status(404).json({error: "Data does not exist"});
-    }
+    console.log(id)
+    ContactService.deletePerson(id)
+    .then((deletedPerson)=>{
+        if (deletedPerson) {
+            res.status(200).json(deletedPerson);  
+        } else {
+            res.status(404).json({error: "Data does not exist"});
+        }
+    })
 })
 
 
@@ -49,7 +56,19 @@ app.post('/api/person', (req, res)=> {
     if ((!name || !number)){
         res.status(404).json({error: "missing data"})
     }
-    ContactService.createPerson(req, res)
+    const person = {
+        name,
+        number,
+        date: Date().toString()
+    }
+    ContactService.createPerson(person)
+    .then((createPerson)=>{
+        res.json(createPerson)
+    })
+    .catch ((err)=> {
+        console.log("big Error")
+        res.json({err: "err"})
+    })
 })
 app.put('/api/person/:id', (req, res)=> {
     const {number} = req.body
@@ -58,7 +77,9 @@ app.put('/api/person/:id', (req, res)=> {
     if ((!number || !id)){
         res.status(404).json({error: "missing data"})
     }
-    res.json(ContactService.updatePerson(id, number))
+    ContactService.updatePerson(id, number)
+    .then((p)=>{
+        res.json(p)})
 })
 
 app.get('/info', (req, res)=> {
