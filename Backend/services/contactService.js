@@ -5,6 +5,7 @@ function getPersons() {
 }
 
 function getPerson(id) {
+    
     return Person.findById(id)
 }
 
